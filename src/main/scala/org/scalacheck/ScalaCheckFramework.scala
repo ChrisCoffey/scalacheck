@@ -121,9 +121,9 @@ private abstract class ScalaCheckRunner(
           val verbosity =
             args.grouped(2).filter(twos => verbosityOpts(twos.head))
             .toSeq.headOption.map(_.last).map(_.toInt).getOrElse(0)
-          val s = if (result.passed) "+" else "!"
+          val s = if (result.passed) Console.GREEN + "+" else Console.RED + "!"
           val n = if (name.isEmpty) taskDef.fullyQualifiedName else name
-          val logMsg = s"$s $n: ${pretty(result, Params(verbosity))}"
+          val logMsg = s"$s $n: ${pretty(result, Params(verbosity))} + ${Console.RESET}"
           loggers.foreach(l => l.info(logMsg))
         }
 
